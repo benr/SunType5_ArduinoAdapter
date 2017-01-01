@@ -16,7 +16,6 @@
 SoftwareSerial sunSerial(10, 11, true);
 
 void setup() {
-  //Normal serial port init for monitoring
   Serial.begin(1200);
   while (!Serial) {
     ; // wait for serial port to connect. Needed for Leonardo only
@@ -26,12 +25,10 @@ void setup() {
 
 void loop() {
   char c = sunSerial.read();
-  //not sure why we're getting this spamming out so let's filter for now (inverse of 0 i guess)
+  // Filter noise
   if (c != 0xFFFFFFFF) {
-    Serial.print(c, DEC);
-    Serial.print("\t0x");
-    Serial.print(c, HEX);
-    Serial.print(":\t");
+    Serial.print(c, DEC); Serial.print("\t0x");
+    Serial.print(c, HEX); Serial.print(":\t");
     printKey(c);
     Serial.print("\n");
   }
@@ -47,6 +44,7 @@ void printKey(int key){
   Serial.print("Key Down: ");
  }
   
+ // Keys mapped via data file processed with AWK for testing:
  switch(key){
   case 29: // Esc
           Serial.print("Esc");
