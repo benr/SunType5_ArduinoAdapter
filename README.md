@@ -75,14 +75,24 @@ It just so happens that these map perfectly to our Arduino library!
 
 In **SunKeyboard-to-USB/sun_keyboard_map.h** I created an array mapping the Sun scancode (as the array index) to the equivilent ASCII charactor.  You'll notice several keys map to "0" because they aren't supported by the Keyboard library (or PC's for that matter).  By messing with this array you can re-map keys as you wish (such as making Caps Locks Control for PC Layout).
 
-Once you have the Sun to ASCII map worked out, everything is simple!  We listen on Serial for input.  If we get a number between 1 and 126 we look it up in the array and then pass the result (ASCII) to Keyboard.press().  If we get a number less than 0 we know this is a key-up event, so we add to 128 to find the key which we then lookup in the array and pass to Keyboard.release().  Finally, if we get 127 as in put, we know that no keys are being pressed, so we send Keyboard.releaseAll()!
+Once you have the Sun to ASCII map worked out, everything is simple!  We listen on Serial for input.  If we get a number between 1 and 126 we look it up in the array and then pass the result (ASCII) to Keyboard.press().  If we get a number less than 0 we know this is a key-up event, so we add to 128 to find the key which we then lookup in the array and pass to Keyboard.release().  Finally, if we get 127 as input, we know that no keys are being pressed, so we send Keyboard.releaseAll()!
 
 Couldn't be simpler.
 
+## Bonus Features
+
+The Keyboard has a speaker built in and you can enable a "bell" (annoying!) and "key chirp".  I have mapped these to the top-right 4 keys: 
+
+* Mute Key: Disable Chirp Mode
+* Decrease Volume Key: Enable Chirp Mode
+* Increase Volume Key: Turn on Bell (constant sound)
+* Power Key: Turn off Bell
+
 ## What doesn't work (yet)
 
-* Caps, Scroll, and Num lock keys do not work
-* All Sun specific keys do not work (but you can remap them how you wish)
+* Scroll Lock and Compose don't function by design; there is no practical use for them and don't see a reason to add the 10 lines of logic
+* I force Number lock on and you can not toggle it (may fix in the future)
+* All Sun specific keys do not work (but you can remap them how you wish), this is a limitation of the way the Arduino Keyboard library emulates the keyboard.  I may find a fix for it in the future, but not planned.
 * The passthrough mouse doesn't work, but I didn't like it anyway.. may or may not add in the future
 
 # Acknowledgements
