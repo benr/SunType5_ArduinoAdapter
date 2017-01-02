@@ -4,8 +4,14 @@
   Sun_KeyCode   ASCII_Code  Description
  */
 
+#define CMD_RESET         0x01
+#define CMD_DISABLE_CLICK 0x0B
+#define CMD_ENABLE_CLICK  0x0A
+#define CMD_ENABLE_BELL   0x02
+#define CMD_DISABLE_BELL  0x03
+
 static const int sun_to_ascii[128] = {
- /* 0 */        0,
+ /* 0 */  	0,
  /* 1 */	0,	/* Stop */
  /* 2 */	0,	/* Volume_Decr */
  /* 3 */	0,	/* Again */
@@ -101,7 +107,7 @@ static const int sun_to_ascii[128] = {
  /* 93 */	54,	/* KP_6/Right */
  /* 94 */	48,	/* KP_0/KP_Insert */
  /* 95 */	0,	/* Find */
- /* 96 */	211,	/* PgUp */
+ /* 96 */	211,	/* T5_PgUp */
  /* 97 */	0,	/* Cut */
  /* 98 */	0,	/* Num_Lock */
  /* 99 */	129,	/* Shift_L */
