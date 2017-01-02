@@ -24,21 +24,16 @@ void setup() {
   Serial.begin(1200);	// Normal serial for Serial Monitor Debugging
   sunSerial.begin(1200);	// Serial Connection to Sun Keyboard
 
+  sunSerial.write(0x0A); // Enable Click
+  sunSerial.write(0x0E); // LED Command
+
   // Initialize USB Keyboard Interface
-  dddsssKeyboard.begin();
+  Keyboard.begin();
 }
 
 
 void loop() {
   char c = sunSerial.read();
-  if (c == 1){	// Stop Key terminates keyboard
-    Serial.println("STOP key pressed, terminating keyboard.");
-    Keyboard.end();
-  }
-  if (c == 3){
-    Serial.println("AGAIN key pressed, resuming keyboard.");
-    Keyboard.begin();
-  }
   if (c != 0xFFFFFFFF) {
     translateKey(c);
   }
